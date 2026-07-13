@@ -1,0 +1,157 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:#0D1117;color:#E6EDF3;font-size:13px}
+.app{display:flex;flex-direction:column;height:600px;background:#0D1117;border-radius:10px;overflow:hidden;border:1px solid #30363D}
+.topbar{background:#161B22;padding:0 18px;height:48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #30363D;flex-shrink:0}
+.topbar-title{color:#58A6FF;font-size:14px;font-weight:500;letter-spacing:.5px}
+.topbar-right{color:#8B949E;font-size:11px}
+.main{display:flex;flex:1;overflow:hidden}
+.sidebar{width:230px;background:#161B22;border-right:1px solid #30363D;display:flex;flex-direction:column;padding:10px 0;flex-shrink:0;overflow-y:auto}
+.sec-label{font-size:9px;font-weight:600;color:#8B949E;letter-spacing:1px;padding:8px 14px 4px}
+.sec-divider{height:1px;background:#30363D;margin:0 14px 4px}
+.sidebar select,.sidebar input[type=text]{width:calc(100% - 28px);margin:0 14px 8px;background:#21262D;border:1px solid #30363D;color:#E6EDF3;border-radius:6px;padding:5px 8px;font-size:11px;outline:none}
+.slider-row{padding:2px 14px 6px;display:flex;align-items:center;justify-content:space-between}
+.slider-row span{font-size:10px;color:#8B949E}
+.slider-val{color:#58A6FF;font-weight:600}
+input[type=range]{width:calc(100% - 28px);margin:0 14px 6px;accent-color:#58A6FF;height:4px}
+.radio-row{display:flex;gap:10px;padding:4px 14px 8px}
+.radio-row label{font-size:11px;color:#E6EDF3;display:flex;align-items:center;gap:4px;cursor:pointer}
+.stat-box{margin:0 14px 8px;background:#21262D;border-radius:6px;padding:8px 10px}
+.stat-row{display:flex;justify-content:space-between;padding:2px 0}
+.stat-key{color:#8B949E;font-size:10px}
+.stat-val{color:#58A6FF;font-size:10px;font-weight:600}
+.btn{margin:3px 14px;padding:7px 10px;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:.3px}
+.btn-green{background:#3FB950;color:#0D1117}
+.btn-red{background:#F78166;color:#0D1117;opacity:.5}
+.btn-blue{background:#58A6FF;color:#0D1117}
+.btn-gray{background:#30363D;color:#8B949E}
+.right{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.prog-area{background:#161B22;border-bottom:1px solid #30363D;padding:8px 14px 10px;flex-shrink:0}
+.status-text{font-size:11px;color:#8B949E;margin-bottom:6px}
+.prog-track{background:#21262D;border-radius:4px;height:6px;overflow:hidden}
+.prog-fill{height:100%;background:#58A6FF;border-radius:4px;width:68%;transition:width .3s}
+.prog-pct{font-size:10px;color:#58A6FF;margin-top:3px}
+.table-area{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.table-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px 4px;flex-shrink:0}
+.table-title{font-size:10px;font-weight:600;color:#E6EDF3;letter-spacing:.5px}
+.table-count{font-size:10px;color:#8B949E}
+.search-row{display:flex;align-items:center;gap:6px;padding:0 14px 6px;flex-shrink:0}
+.search-row input{flex:1;background:#21262D;border:1px solid #30363D;color:#E6EDF3;border-radius:6px;padding:4px 8px;font-size:11px;outline:none}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{background:#21262D;color:#58A6FF;font-weight:600;padding:7px 10px;text-align:left;font-size:10px;letter-spacing:.3px;position:sticky;top:0}
+td{padding:7px 10px;border-bottom:1px solid #1C2128;color:#E6EDF3}
+tr:nth-child(even) td{background:#161B22}
+tr:hover td{background:#1F6FEB22}
+.badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:9px;font-weight:600}
+.badge-gold{background:#30290A;color:#D29922}
+.badge-blue{background:#0C2D6B;color:#58A6FF}
+.badge-green{background:#0A2A12;color:#3FB950}
+.tbl-scroll{flex:1;overflow-y:auto}
+.log-area{background:#161B22;border-top:1px solid #30363D;padding:8px 14px;height:88px;overflow-y:auto;flex-shrink:0}
+.log-line{font-size:10px;font-family:var(--font-mono);padding:1px 0}
+.log-ok{color:#3FB950}.log-info{color:#58A6FF}.log-warn{color:#D29922}.log-ts{color:#444C56}
+</style>
+<div class="app">
+  <div class="topbar">
+    <span class="topbar-title">⬡ WebHarvest Pro</span>
+    <span class="topbar-right">v2.0 &nbsp;•&nbsp; Ethical Scraper &nbsp;|&nbsp; 🕐 14:22:07</span>
+  </div>
+  <div class="main">
+    <div class="sidebar">
+      <div class="sec-divider"></div>
+      <div class="sec-label">🎯 TARGET WEBSITE</div>
+      <select><option>Books to Scrape (books.toscrape.com)</option><option>Quotes to Scrape (quotes.toscrape.com)</option></select>
+
+      <div class="sec-divider"></div>
+      <div class="sec-label">⚙️ SCRAPE SETTINGS</div>
+      <div class="slider-row"><span>Pages to scrape</span><span class="slider-val">3</span></div>
+      <input type="range" min="1" max="10" value="3">
+      <div class="slider-row"><span>Delay (sec)</span><span class="slider-val">0.5</span></div>
+      <input type="range" min="0" max="30" value="5">
+
+      <div class="sec-divider"></div>
+      <div class="sec-label">💾 OUTPUT FORMAT</div>
+      <div class="radio-row">
+        <label><input type="radio" name="fmt" checked> CSV</label>
+        <label><input type="radio" name="fmt"> JSON</label>
+        <label><input type="radio" name="fmt"> Both</label>
+      </div>
+
+      <div class="sec-divider"></div>
+      <div class="sec-label">📁 SAVE LOCATION</div>
+      <input type="text" value="~/Desktop">
+
+      <div class="sec-divider"></div>
+      <div class="sec-label">📊 SESSION STATS</div>
+      <div class="stat-box">
+        <div class="stat-row"><span class="stat-key">Items Found</span><span class="stat-val">60</span></div>
+        <div class="stat-row"><span class="stat-key">Pages Done</span><span class="stat-val">3</span></div>
+        <div class="stat-row"><span class="stat-key">Errors</span><span class="stat-val" style="color:#F78166">0</span></div>
+        <div class="stat-row"><span class="stat-key">Elapsed</span><span class="stat-val">4s</span></div>
+      </div>
+
+      <button class="btn btn-green">▶  START SCRAPING</button>
+      <button class="btn btn-red">⏹  STOP</button>
+      <button class="btn btn-blue">💾  EXPORT DATA</button>
+      <button class="btn btn-gray">🗑  CLEAR ALL</button>
+    </div>
+
+    <div class="right">
+      <div class="prog-area">
+        <div class="status-text">✓ Done! 60 items collected in 4s.</div>
+        <div class="prog-track"><div class="prog-fill" style="width:100%"></div></div>
+        <div class="prog-pct">100%</div>
+      </div>
+
+      <div class="table-area">
+        <div class="table-head">
+          <span class="table-title">EXTRACTED PRODUCTS</span>
+          <span class="table-count">60 items</span>
+        </div>
+        <div class="search-row">
+          <span style="color:#8B949E;font-size:13px">🔍</span>
+          <input type="text" placeholder="Filter products…">
+        </div>
+        <div class="tbl-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Category</th>
+                <th>Scraped At</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>A Light in the Attic</td><td style="color:#3FB950">£51.77</td><td><span class="badge badge-gold">3★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+              <tr><td>Tipping the Velvet</td><td style="color:#3FB950">£53.74</td><td><span class="badge badge-gold">1★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+              <tr><td>Soumission</td><td style="color:#3FB950">£50.10</td><td><span class="badge badge-gold">1★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+              <tr><td>Sharp Objects</td><td style="color:#3FB950">£47.82</td><td><span class="badge badge-gold">4★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+              <tr><td>Sapiens: A Brief History</td><td style="color:#3FB950">£54.23</td><td><span class="badge badge-gold">5★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+              <tr><td>The Requiem Red</td><td style="color:#3FB950">£22.65</td><td><span class="badge badge-gold">1★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+              <tr><td>The Dirty Little Secrets</td><td style="color:#3FB950">£33.34</td><td><span class="badge badge-gold">4★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+              <tr><td>The Coming Woman</td><td style="color:#3FB950">£17.93</td><td><span class="badge badge-gold">3★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+              <tr><td>The Boys in the Boat</td><td style="color:#3FB950">£22.60</td><td><span class="badge badge-gold">4★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+              <tr><td>The Black Maria</td><td style="color:#3FB950">£52.15</td><td><span class="badge badge-gold">1★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+              <tr><td>Starving Hearts (Triangular Trade)</td><td style="color:#3FB950">£13.99</td><td><span class="badge badge-gold">2★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+              <tr><td>Shakespeare's Sonnets</td><td style="color:#3FB950">£20.66</td><td><span class="badge badge-gold">4★</span></td><td><span class="badge badge-blue">Books</span></td><td style="color:#8B949E">2025-01-12 14:22</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="log-area">
+        <div class="log-line"><span class="log-ts">[14:22:04]</span> <span class="log-info">Starting scrape of Books to Scrape…</span></div>
+        <div class="log-line"><span class="log-ts">[14:22:04]</span> <span class="log-info">Fetching: https://books.toscrape.com/</span></div>
+        <div class="log-line"><span class="log-ts">[14:22:05]</span> <span class="log-ok">  ✓ Got 20 items (total 20)</span></div>
+        <div class="log-line"><span class="log-ts">[14:22:06]</span> <span class="log-info">Fetching: page 2…</span></div>
+        <div class="log-line"><span class="log-ts">[14:22:06]</span> <span class="log-ok">  ✓ Got 20 items (total 40)</span></div>
+        <div class="log-line"><span class="log-ts">[14:22:07]</span> <span class="log-info">Fetching: page 3…</span></div>
+        <div class="log-line"><span class="log-ts">[14:22:07]</span> <span class="log-ok">  ✓ Got 20 items (total 60)</span></div>
+        <div class="log-line"><span class="log-ts">[14:22:07]</span> <span class="log-ok">Scrape complete — 60 items in 4s.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
